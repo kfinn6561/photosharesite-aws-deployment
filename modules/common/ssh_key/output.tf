@@ -3,7 +3,7 @@ output "key_name" {
 }
 
 output "private_key" {
-  value = tls_private_key.ed25519.private_key_pem
+  value     = tls_private_key.ed25519.private_key_pem
   sensitive = "true"
 }
 
