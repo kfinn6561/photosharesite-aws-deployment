@@ -1,9 +1,10 @@
 resource "random_string" "bucket_ending" {
-  length = 4
+  length    = 4
+  min_lower = 4
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "kieran-finn-pss-deployment-support${random_string.bucket_ending.result}"
+  bucket = "kieran-finn-pss-deployment-support-${random_string.bucket_ending.result}"
 
   tags = {
     Name = "pss-deployment-support"
