@@ -1,3 +1,3 @@
-output "bucket-id" {
-  value = aws_s3_bucket.bucket.id
+output "bucket-arn" {
+  value = aws_s3_bucket.bucket.arn
 }
