@@ -8,5 +8,6 @@ module "deploy-support-bucket" {
 module "database" {
   source = "./modules/database"
 
-  database-name = "photo-share-site"
+  database-name         = "photo-share-site"
+  instance-profile-name = module.deploy-support-bucket.instance-profile-name
 }
