@@ -58,6 +58,12 @@ resource "aws_iam_policy" "bucket-reader-policy" {
   })
 }
 
+resource "aws_iam_policy_attachment" "bucket-reader-attach" {
+  name = "bucket-reader-attachment"
+  roles = [aws_iam_role.bucket-reader-role.name]
+  policy_arn = aws_iam_policy.bucket-reader-policy.arn
+}
+
 resource "aws_s3_bucket_acl" "pss-deploy-support-bucket-acl" {
   bucket = aws_s3_bucket.bucket.id
   access_control_policy {
