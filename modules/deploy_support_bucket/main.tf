@@ -59,9 +59,14 @@ resource "aws_iam_policy" "bucket-reader-policy" {
 }
 
 resource "aws_iam_policy_attachment" "bucket-reader-attach" {
-  name = "bucket-reader-attachment"
-  roles = [aws_iam_role.bucket-reader-role.name]
+  name       = "bucket-reader-attachment"
+  roles      = [aws_iam_role.bucket-reader-role.name]
   policy_arn = aws_iam_policy.bucket-reader-policy.arn
+}
+
+resource "aws_iam_instance_profile" "bucket-reader-profile" {
+  name  = "bucket-reader-profile"
+  roles = [aws_iam_role.bucket-reader-role.name]
 }
 
 resource "aws_s3_bucket_acl" "pss-deploy-support-bucket-acl" {
@@ -69,7 +74,7 @@ resource "aws_s3_bucket_acl" "pss-deploy-support-bucket-acl" {
   access_control_policy {
     grant {
       grantee {
-        id   = aws_iam_role.bucket-reader-role.id
+        id   = aws_iam_instance_profile.bucket-reader-profile.id
         type = "CanonicalUser"
       }
       permission = "READ"
