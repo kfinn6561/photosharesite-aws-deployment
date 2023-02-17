@@ -11,7 +11,7 @@ module "ssh_key" {
 resource "aws_security_group" "pss-db-security-groups" {
   egress = [
     {
-      cidr_blocks      = [ "0.0.0.0/0", ]
+      cidr_blocks      = ["0.0.0.0/0", ]
       description      = ""
       from_port        = 0
       ipv6_cidr_blocks = []
@@ -22,9 +22,9 @@ resource "aws_security_group" "pss-db-security-groups" {
       to_port          = 0
     }
   ]
-  ingress                = [
+  ingress = [
     {
-      cidr_blocks      = [ "0.0.0.0/0", ]
+      cidr_blocks      = ["0.0.0.0/0", ]
       description      = ""
       from_port        = 22
       ipv6_cidr_blocks = []
@@ -43,9 +43,9 @@ resource "aws_key_pair" "aws-ssh-key" {
 }
 
 resource "aws_instance" "db" {
-  ami           = "ami-85a2ade3" #MySQL 5.7
-  instance_type = "t2.micro"
-  key_name      = aws_key_pair.aws-ssh-key.key_name
+  ami                    = "ami-85a2ade3" #MySQL 5.7
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
 
   user_data = templatefile("${path.module}/startup.sh", {})
