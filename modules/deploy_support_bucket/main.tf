@@ -1,5 +1,9 @@
+resource "random_string" "bucket_ending" {
+  length = 4
+}
+
 resource "aws_s3_bucket" "bucket" {
-  bucket = "my-tf-test-bucket"
+  bucket = "kieran-finn-pss-deployment-support${random_string.bucket_ending.result}"
 
   tags = {
     Name = "pss-deployment-support"
