@@ -5,6 +5,7 @@ resource "random_string" "bucket_ending" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "kieran-finn-pss-deployment-support-${random_string.bucket_ending.result}"
+  force_destroy = true
 
   tags = {
     Name = "pss-deployment-support"
