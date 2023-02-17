@@ -70,19 +70,20 @@ resource "aws_iam_instance_profile" "bucket-reader-profile" {
 
 resource "aws_s3_bucket_acl" "pss-deploy-support-bucket-acl" {
   bucket = aws_s3_bucket.bucket.id
-  access_control_policy {
-    grant {
-      grantee {
-        id   = aws_iam_instance_profile.bucket-reader-profile.id
-        type = "CanonicalUser"
-      }
-      permission = "READ"
-    }
-
-    owner {
-      id = data.aws_canonical_user_id.current.id
-    }
-  }
+  acl    = "private"
+  #  access_control_policy {
+  #    grant {
+  #      grantee {
+  #        id   = aws_iam_instance_profile.bucket-reader-profile.id
+  #        type = "CanonicalUser"
+  #      }
+  #      permission = "READ"
+  #    }
+  #
+  #    owner {
+  #      id = data.aws_canonical_user_id.current.id
+  #    }
+  #  }
 }
 
 
