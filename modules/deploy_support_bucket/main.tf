@@ -28,7 +28,6 @@ resource "aws_iam_role" "bucket-reader-role" {
         Principal = {
           Service = "ec2.amazonaws.com"
         }
-        SID = ""
       },
     ]
   })
