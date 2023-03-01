@@ -10,5 +10,5 @@ variable "bucket-reader-policy-arn" {
 
 variable "deploy-support-bucket-name" {
   description = "name of the deploy support bucket"
-  trype       = string
+  type        = string
 }
