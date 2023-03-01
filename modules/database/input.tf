@@ -8,7 +8,7 @@ variable "bucket-reader-policy-arn" {
   type        = string
 }
 
-variable "deploy-support-bucket-name" {
-  description = "name of the deploy support bucket"
+variable "deploy-support-bucket-id" {
+  description = "id of the deploy support bucket"
   type        = string
 }

@@ -10,5 +10,5 @@ module "database" {
 
   database-name              = "photo-share-site"
   bucket-reader-policy-arn   = module.deploy-support-bucket.bucket-reader-policy-arn
-  deploy-support-bucket-name = module.deploy-support-bucket.bucket-name
+  deploy-support-bucket-id = module.deploy-support-bucket.bucket-id
 }

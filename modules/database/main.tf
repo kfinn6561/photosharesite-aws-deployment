@@ -63,7 +63,7 @@ resource "aws_iam_role" "database-role" {
 
 resource "aws_iam_policy_attachment" "bucket-reader-attach" {
   name       = "bucket-reader-attachment"
-  roles      = [aws_iam_role.database_role.name]
+  roles      = [aws_iam_role.database-role.name]
   policy_arn = var.bucket-reader-policy-arn
 }
 
