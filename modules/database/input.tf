@@ -3,7 +3,12 @@ variable "database-name" {
   type        = string
 }
 
-variable "instance-profile-name" {
-  description = "Name of the instance profile to attach"
+variable "bucket-reader-policy-arn" {
+  description = "arn of the bcuket reader policy"
   type        = string
+}
+
+variable "deploy-support-bucket-name" {
+  description="name of the deploy support bucket"
+  trype=string
 }

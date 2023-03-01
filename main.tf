@@ -9,5 +9,6 @@ module "database" {
   source = "./modules/database"
 
   database-name         = "photo-share-site"
-  instance-profile-name = module.deploy-support-bucket.instance-profile-name
+  bucket-reader-policy-arn= module.deploy-support-bucket.bucket-reader-policy-arn
+  deploy-support-bucket-name = module.deploy-support-bucket.bucket-name
 }

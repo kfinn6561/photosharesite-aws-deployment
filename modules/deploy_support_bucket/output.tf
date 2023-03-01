@@ -2,6 +2,10 @@ output "bucket-id" {
   value = aws_s3_bucket.bucket.id
 }
 
-output "instance-profile-name" {
-  value = aws_iam_instance_profile.bucket-reader-profile.name
+output "bucket-name" {
+  value = aws_s3_bucket.bucket.name
+}
+
+output "bucket-reader-policy-arn" {
+  value = aws_iam_policy.bucket-reader-policy.arn
 }
