@@ -47,6 +47,7 @@ resource "aws_instance" "db" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
+  iam_instance_profile   = var.instance-profile-name
 
   user_data = templatefile("${path.module}/startup.sh", {})
 
