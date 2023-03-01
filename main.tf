@@ -8,7 +8,7 @@ module "deploy-support-bucket" {
 module "database" {
   source = "./modules/database"
 
-  database-name         = "photo-share-site"
-  bucket-reader-policy-arn= module.deploy-support-bucket.bucket-reader-policy-arn
+  database-name              = "photo-share-site"
+  bucket-reader-policy-arn   = module.deploy-support-bucket.bucket-reader-policy-arn
   deploy-support-bucket-name = module.deploy-support-bucket.bucket-name
 }
