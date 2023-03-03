@@ -79,7 +79,7 @@ resource "aws_instance" "db" {
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
   iam_instance_profile   = aws_iam_instance_profile.database-profile.name
 
-  user_data = templatefile("${path.module}/startup.sh", {})
+  user_data = templatefile("${path.module}/startup.sh", {bucket-name=var.deploy-support-bucket-id})
 
   tags = {
     Name = "Database"
