@@ -28,7 +28,8 @@ resource "aws_iam_policy" "bucket-reader-policy" {
           "s3:List*"
         ]
         Resource = [
-          aws_s3_bucket.bucket.arn
+          aws_s3_bucket.bucket.arn,
+          "${aws_s3_bucket.bucket.arn}/*"
         ]
       },
     ]
