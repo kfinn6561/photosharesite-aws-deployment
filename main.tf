@@ -7,7 +7,6 @@ module "deploy-support-bucket" {
   source = "./modules/deploy_support_bucket"
 
   database-directory = pathexpand("${var.root_directory}/${var.db_dir_name}")
-  VPC-ID             = module.network.vpc-id
 }
 
 
