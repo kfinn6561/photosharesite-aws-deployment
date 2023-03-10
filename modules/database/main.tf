@@ -42,13 +42,53 @@ resource "aws_key_pair" "aws-ssh-key" {
   public_key = module.ssh_key.public_key
 }
 
+resource "aws_iam_role" "database-role" {
+  name = "database_role"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_policy_attachment" "bucket-reader-attach" {
+  name       = "bucket-reader-attachment"
+  roles      = [aws_iam_role.database-role.name]
+  policy_arn = var.bucket-reader-policy-arn
+}
+
+resource "aws_iam_instance_profile" "database-profile" {
+  name = "database-profile"
+  role = aws_iam_role.database-role.name
+}
+
+module "AMIS" {
+  source = "../common/AMIs"
+}
+
 resource "aws_instance" "db" {
-  ami                    = "ami-85a2ade3" #MySQL 5.7
+  ami                    = module.AMIS.ubuntu-ami-id #"ami-85a2ade3" #MySQL 5.7
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
+  iam_instance_profile   = aws_iam_instance_profile.database-profile.name
 
-  user_data = templatefile("${path.module}/startup.sh", {})
+  user_data = templatefile("${path.module}/startup.sh",
+    {
+      bucket-name   = var.deploy-support-bucket-id,
+      database-name = var.database-name
+  })
+  user_data_replace_on_change = true
 
   tags = {
     Name = "Database"
