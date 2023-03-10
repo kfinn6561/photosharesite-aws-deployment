@@ -76,14 +76,14 @@ module "AMIS" {
   source = "../common/AMIs"
 }
 
-resource "aws_instance" "db" {
+resource "aws_instance" "ubuntu-db" {
   ami                    = module.AMIS.ubuntu-ami-id #"ami-85a2ade3" #MySQL 5.7
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
   iam_instance_profile   = aws_iam_instance_profile.database-profile.name
 
-  user_data = templatefile("${path.module}/startup.sh",
+  user_data = templatefile("${path.module}/ubuntu-startup.sh",
     {
       bucket-name   = var.deploy-support-bucket-id,
       database-name = var.database-name
@@ -91,6 +91,44 @@ resource "aws_instance" "db" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "Database"
+    Name = "PSS Database (Ubuntu)"
+  }
+}
+
+resource "aws_instance" "amazon-linux-db" {
+  ami                    = module.AMIS.amazon-linux-ami-id #"ami-85a2ade3" #MySQL 5.7
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.aws-ssh-key.key_name
+  vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
+  iam_instance_profile   = aws_iam_instance_profile.database-profile.name
+
+  user_data = templatefile("${path.module}/amazon-linux-startup.sh",
+    {
+      bucket-name   = var.deploy-support-bucket-id,
+      database-name = var.database-name
+    })
+  user_data_replace_on_change = true
+
+  tags = {
+    Name = "PSS Database (Amazon Linux)"
+  }
+}
+
+resource "aws_instance" "mysql-db" {
+  ami                    = "ami-85a2ade3" #MySQL 5.7
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.aws-ssh-key.key_name
+  vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
+  iam_instance_profile   = aws_iam_instance_profile.database-profile.name
+
+  user_data = templatefile("${path.module}/mysql-startup.sh",
+    {
+      bucket-name   = var.deploy-support-bucket-id,
+      database-name = var.database-name
+    })
+  user_data_replace_on_change = true
+
+  tags = {
+    Name = "PSS Database (MYSQL)"
   }
 }
