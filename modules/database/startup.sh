@@ -2,19 +2,19 @@
 # shellcheck disable=SC2164
 cd /home/ubuntu
 
-# update apt
-apt -y update
+# update apt-get
+apt-get -y update
 
 # install aws cli
-apt -y install awscli
+apt-get -y install awscli
 
 # copy all sql files from S3
 aws s3 sync s3://"${bucket-name}"/procedures/ ./procedures
 aws s3 sync s3://"${bucket-name}"/tables/ ./tables
 
 # install mysql
-apt -y install mysql-server
-apt -y install mysql
+apt-get -y install mysql-server
+apt-get -y install mysql
 
 # create the database
 mysqladmin create "${database-name}"
