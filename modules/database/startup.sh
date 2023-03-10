@@ -28,5 +28,5 @@ done
 # Create the procedures
 for fname in procedures/*
 do
-  mysql "${database-name}" > "$fname"
+  mysql "${database-name}" < "$fname"
 done
