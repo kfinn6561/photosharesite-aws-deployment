@@ -1,6 +1,6 @@
 #!/bin/bash -xv
 # shellcheck disable=SC2164
-cd /home/ec2-user
+cd /home/ubuntu
 
 # update apt
 apt -y update
