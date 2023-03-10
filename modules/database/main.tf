@@ -77,7 +77,7 @@ module "AMIS" {
 }
 
 resource "aws_instance" "db" {
-  ami                    = module.AMIS.amazon-linux-ami-id #"ami-85a2ade3" #MySQL 5.7
+  ami                    = module.AMIS.ubuntu-ami-id #"ami-85a2ade3" #MySQL 5.7
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
