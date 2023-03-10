@@ -2,7 +2,11 @@
 # shellcheck disable=SC2164
 cd /home/ec2-user
 
+# update apt
 apt -y update
+
+# install aws cli
+apt -y install awscli
 
 # copy all sql files from S3
 aws s3 sync s3://"${bucket-name}"/procedures/ ./procedures
