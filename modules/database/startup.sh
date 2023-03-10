@@ -22,7 +22,7 @@ mysqladmin create "${database-name}"
 # Create the tables
 for fname in tables/*
 do
-  mysql "${database-name}" > "$fname"
+  mysql "${database-name}" < "$fname"
 done
 
 # Create the procedures
