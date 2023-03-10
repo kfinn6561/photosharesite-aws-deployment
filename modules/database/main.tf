@@ -72,8 +72,12 @@ resource "aws_iam_instance_profile" "database-profile" {
   role = aws_iam_role.database-role.name
 }
 
+module "AMIS" {
+  source = "../common/AMIs"
+}
+
 resource "aws_instance" "db" {
-  ami                    = "ami-85a2ade3" #MySQL 5.7
+  ami                    = module.AMIS.ubuntu-ami-id #"ami-85a2ade3" #MySQL 5.7
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.aws-ssh-key.key_name
   vpc_security_group_ids = [aws_security_group.pss-db-security-groups.id]
@@ -81,9 +85,9 @@ resource "aws_instance" "db" {
 
   user_data = templatefile("${path.module}/startup.sh",
     {
-      bucket-name=var.deploy-support-bucket-id,
-      database-name=var.database-name
-    })
+      bucket-name   = var.deploy-support-bucket-id,
+      database-name = var.database-name
+  })
 
   tags = {
     Name = "Database"
