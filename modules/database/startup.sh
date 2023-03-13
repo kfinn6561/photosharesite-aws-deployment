@@ -1,8 +1,7 @@
 #!/bin/bash -xv
 # shellcheck disable=SC2164
 
-# run script as ec2-user from home
-su - ec2-user
+# everything should be run from the home directory
 cd /home/ec2-user
 
 # copy all sql files from S3
