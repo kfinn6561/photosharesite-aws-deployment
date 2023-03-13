@@ -6,20 +6,20 @@ su - ec2-user
 cd /home/ec2-user
 
 # copy all sql files from S3
-aws s3 sync s3://"${bucket-name}"/procedures/ ./procedures
-aws s3 sync s3://"${bucket-name}"/tables/ ./tables
+su - ec2-user -c "aws s3 sync s3://${bucket-name}/procedures/ ./procedures"
+su - ec2-user -c "aws s3 sync s3://${bucket-name}/tables/ ./tables"
 
 # create the database
-mysqladmin create "${database-name}"
+su - ec2-user -c "mysqladmin create ${database-name}"
 
 # Create the tables
 for fname in tables/*
 do
-  mysql "${database-name}" > "$fname"
+  su - ec2-user -c "mysql ${database-name} > $fname"
 done
 
 # Create the procedures
 for fname in procedures/*
 do
-  mysql "${database-name}" > "$fname"
+  su - ec2-user -c "mysql ${database-name} > $fname"
 done
