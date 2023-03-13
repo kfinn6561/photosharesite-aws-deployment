@@ -14,11 +14,11 @@ su - ec2-user -c "mysqladmin create ${database-name}"
 # Create the tables
 for fname in tables/*
 do
-  su - ec2-user -c "mysql ${database-name} > $fname"
+  su - ec2-user -c "mysql ${database-name} < $fname"
 done
 
 # Create the procedures
 for fname in procedures/*
 do
-  su - ec2-user -c "mysql ${database-name} > $fname"
+  su - ec2-user -c "mysql ${database-name} < $fname"
 done
