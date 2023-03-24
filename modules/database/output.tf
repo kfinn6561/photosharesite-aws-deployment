@@ -7,3 +7,7 @@ output "db-password" {
   value     = random_password.db-root-password.result
   sensitive = true
 }
+
+output "db-ip-address" {
+  value = aws_instance.db.public_ip
+}
