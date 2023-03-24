@@ -83,7 +83,7 @@ resource "aws_instance" "db" {
     {
       bucket-name   = var.deploy-support-bucket-id,
       database-name = var.database-name,
-      db-password   = random_password.db-root-password
+      db-password   = random_password.db-root-password.result
   })
   user_data_replace_on_change = true
 

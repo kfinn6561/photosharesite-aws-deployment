@@ -4,6 +4,6 @@ output "ssh-private-key" {
 }
 
 output "db-password" {
-  value     = random_password.db-root-password
+  value     = random_password.db-root-password.result
   sensitive = true
 }
