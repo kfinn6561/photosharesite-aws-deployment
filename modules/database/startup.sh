@@ -7,8 +7,6 @@ if [ $UID -eq 0 ]; then
   exec su ec2-user $0
 fi
 
-echo "This will be run from user $USER"
-
 # everything should be run from the home directory
 cd /home/ec2-user
 
