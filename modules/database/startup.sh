@@ -22,3 +22,6 @@ for fname in procedures/*
 do
   su - ec2-user -c "mysql ${database-name} < $fname"
 done
+
+# set an admin password
+su - ec2-user -c "mysqladmin --user=root password ${db-password}"
