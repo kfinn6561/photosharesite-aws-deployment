@@ -1,4 +1,4 @@
-resource "random_password" "admin-pwd" {
+resource "random_password" "db-user-password" {
   length  = 16
   special = false
 }
@@ -33,6 +33,17 @@ resource "aws_security_group" "pss-db-security-groups" {
       security_groups  = []
       self             = false
       to_port          = 22
+    },
+    {
+      cidr_blocks      = ["0.0.0.0/0", ] //todo: lock this down to only backend
+      description      = ""
+      from_port        = 3306
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 3306
     }
   ]
 }
@@ -82,7 +93,9 @@ resource "aws_instance" "db" {
   user_data = templatefile("${path.module}/startup.sh",
     {
       bucket-name   = var.deploy-support-bucket-id,
-      database-name = var.database-name
+      database-name = var.database-name,
+      db-username   = var.db-username,
+      db-password   = random_password.db-user-password.result
   })
   user_data_replace_on_change = true
 
