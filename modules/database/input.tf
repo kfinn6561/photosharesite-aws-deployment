@@ -3,6 +3,11 @@ variable "database-name" {
   type        = string
 }
 
+variable "db-username" {
+  description = "Name of the user to connect to the db"
+  type        = string
+}
+
 variable "bucket-reader-policy-arn" {
   description = "arn of the bcuket reader policy"
   type        = string

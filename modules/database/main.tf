@@ -35,7 +35,7 @@ resource "aws_security_group" "pss-db-security-groups" {
       to_port          = 22
     },
     {
-      cidr_blocks      = ["0.0.0.0/0", ]//todo: lock this down to only backend
+      cidr_blocks      = ["0.0.0.0/0", ] //todo: lock this down to only backend
       description      = ""
       from_port        = 3306
       ipv6_cidr_blocks = []
@@ -94,7 +94,8 @@ resource "aws_instance" "db" {
     {
       bucket-name   = var.deploy-support-bucket-id,
       database-name = var.database-name,
-      db-password   = random_password.db-root-password.result
+      db-username   = var.db-username
+      db-password   = random_password.db-root-password.result,
   })
   user_data_replace_on_change = true
 

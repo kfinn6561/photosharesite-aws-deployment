@@ -30,4 +30,10 @@ do
 done
 
 # create a user
-#su - ec2-user -c "mysql ${database-name} -e  "
+mysql ${database-name} -e  << 'EOF'
+CREATE USER '${db-username}'@'localhost' IDENTIFIED BY '${db-password}';
+CREATE USER '${db-username}'@'%' IDENTIFIED BY ''${db-password}';
+GRANT ALL PRIVILEGES ON ${database-name}.* to ${db-username}@localhost IDENTIFIED BY '${db-password}' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON ${database-name}.* to ${db-username}@'%' IDENTIFIED BY '${db-password}' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF

@@ -14,6 +14,7 @@ module "database" {
   source = "./modules/database"
 
   database-name            = "photosharesite"
+  db-username              = "photosharesite-user"
   bucket-reader-policy-arn = module.deploy-support-bucket.bucket-reader-policy-arn
   deploy-support-bucket-id = module.deploy-support-bucket.bucket-id
 }
