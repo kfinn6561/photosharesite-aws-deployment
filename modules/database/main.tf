@@ -1,4 +1,4 @@
-resource "random_password" "db-root-password" {
+resource "random_password" "db-user-password" {
   length  = 16
   special = false
 }
@@ -95,7 +95,7 @@ resource "aws_instance" "db" {
       bucket-name   = var.deploy-support-bucket-id,
       database-name = var.database-name,
       db-username   = var.db-username
-      db-password   = random_password.db-root-password.result,
+      db-password   = random_password.db-user-password.result,
   })
   user_data_replace_on_change = true
 
