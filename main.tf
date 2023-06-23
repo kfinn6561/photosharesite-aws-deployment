@@ -20,3 +20,8 @@ module "database" {
 
   depends_on = [module.deploy-support-bucket]
 }
+
+module "media-files-bucket" {
+  source = "./modules/media_files_bucket"
+}
+
