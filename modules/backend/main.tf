@@ -17,7 +17,7 @@ resource "aws_iam_role" "backend-role" {
         Effect = "Allow"
         Action = "sts:AssumeRole"
         Principal = {
-          User = aws_iam_user.backend-user.arn
+          AWS = aws_iam_user.backend-user.arn
         }
       },
     ]
