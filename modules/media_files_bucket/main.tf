@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_iam_policy" "bucket-reader-policy" {
-  name        = "bucket_reader_policy"
+  name        = "media_files_bucket_reader_policy"
   description = "policy allowing reading of the media files bucket"
 
   # Terraform's "jsonencode" function converts a
@@ -37,8 +37,8 @@ resource "aws_iam_policy" "bucket-reader-policy" {
 }
 
 resource "aws_iam_policy" "bucket-writer-policy" {
-  name        = "bucket_reader_policy"
-  description = "policy allowing reading of the media files bucket"
+  name        = "media_files_bucket_writer_policy"
+  description = "policy allowing writing to the media files bucket"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.

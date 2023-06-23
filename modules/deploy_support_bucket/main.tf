@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_iam_policy" "bucket-reader-policy" {
-  name        = "bucket_reader_policy"
+  name        = "deploy_support_bucket_reader_policy"
   description = "policy allowing reading of the deploy support bucket"
 
   # Terraform's "jsonencode" function converts a
