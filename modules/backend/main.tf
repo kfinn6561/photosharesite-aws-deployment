@@ -13,6 +13,13 @@ resource "aws_iam_role" "backend-role" {
           Service = "ec2.amazonaws.com"
         }
       },
+      {
+        Effect = "Allow"
+        Action = "sts:AssumeRole"
+        Principal = {
+          User = aws_iam_user.backend-user.arn
+        }
+      },
     ]
   })
 }
@@ -29,8 +36,10 @@ resource "aws_iam_policy_attachment" "bucket-writer-attach" {
   policy_arn = var.bucket-writer-policy-arn
 }
 
-
+resource "aws_iam_user" "backend-user" {
+  name = "backend-user"
+}
 
 resource "aws_iam_access_key" "backend-user-access-key" {
-  user = "your_iam_username"
+  user = aws_iam_user.backend-user.name
 }
