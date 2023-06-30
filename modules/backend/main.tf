@@ -13,13 +13,6 @@ resource "aws_iam_role" "backend-role" {
           Service = "ec2.amazonaws.com"
         }
       },
-      {
-        Effect = "Allow"
-        Action = "sts:AssumeRole"
-        Principal = {
-          AWS = aws_iam_user.backend-user.arn
-        }
-      },
     ]
   })
 }
@@ -27,12 +20,14 @@ resource "aws_iam_role" "backend-role" {
 resource "aws_iam_policy_attachment" "bucket-reader-attach" {
   name       = "bucket-reader-attachment"
   roles      = [aws_iam_role.backend-role.name]
+  users      = [aws_iam_user.backend-user.name]
   policy_arn = var.bucket-reader-policy-arn
 }
 
 resource "aws_iam_policy_attachment" "bucket-writer-attach" {
   name       = "bucket-writer-attachment"
   roles      = [aws_iam_role.backend-role.name]
+  users      = [aws_iam_user.backend-user.name]
   policy_arn = var.bucket-writer-policy-arn
 }
 
