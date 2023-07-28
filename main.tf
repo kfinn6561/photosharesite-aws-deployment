@@ -25,3 +25,10 @@ module "media-files-bucket" {
   source = "./modules/media_files_bucket"
 }
 
+module "backend" {
+  source = "./modules/backend"
+
+  bucket-reader-policy-arn = module.media-files-bucket.bucket-reader-policy-arn
+  bucket-writer-policy-arn = module.media-files-bucket.bucket-writer-policy-arn
+  media-files-bucket-id    = module.media-files-bucket.bucket-id
+}
