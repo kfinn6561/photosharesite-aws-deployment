@@ -63,7 +63,8 @@ resource "aws_iam_policy" "bucket-writer-policy" {
           "s3:Delete*"
         ]
         Resource = [
-          aws_s3_bucket.bucket.arn
+          aws_s3_bucket.bucket.arn,
+          "${aws_s3_bucket.bucket.arn}/*"
         ]
       },
     ]
