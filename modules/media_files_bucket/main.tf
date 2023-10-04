@@ -12,6 +12,17 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "abort-multipart-upload-policy" {
+  bucket = aws_s3_bucket.bucket.id
+  rule {
+    id     = "abort multipart uploads"
+    status = "Enabled"
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 2
+    }
+  }
+}
+
 resource "aws_iam_policy" "bucket-reader-policy" {
   name        = "media_files_bucket_reader_policy"
   description = "policy allowing reading of the media files bucket"
@@ -52,7 +63,8 @@ resource "aws_iam_policy" "bucket-writer-policy" {
           "s3:Delete*"
         ]
         Resource = [
-          aws_s3_bucket.bucket.arn
+          aws_s3_bucket.bucket.arn,
+          "${aws_s3_bucket.bucket.arn}/*"
         ]
       },
     ]

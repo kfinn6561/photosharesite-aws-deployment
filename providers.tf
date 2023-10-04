@@ -12,7 +12,7 @@ terraform {
 # Declaring AWS Provider named 'aws'
 provider "aws" {
   region                   = "eu-west-1"
-  shared_config_files      = [pathexpand("~/.aws/config")]
-  shared_credentials_files = [pathexpand("~/.aws/credentials")]
+  shared_config_files      = [pathexpand("~/.aws/PSS_config")]
+  shared_credentials_files = [pathexpand("~/.aws/PSS_credentials")]
   profile                  = "photosharesite"
 }
