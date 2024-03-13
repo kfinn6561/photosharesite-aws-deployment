@@ -28,7 +28,8 @@ module "media-files-bucket" {
 module "backend" {
   source = "./modules/backend"
 
-  bucket-reader-policy-arn = module.media-files-bucket.bucket-reader-policy-arn
-  bucket-writer-policy-arn = module.media-files-bucket.bucket-writer-policy-arn
-  media-files-bucket-id    = module.media-files-bucket.bucket-id
+  bucket-reader-policy-arn             = module.media-files-bucket.bucket-reader-policy-arn
+  bucket-writer-policy-arn             = module.media-files-bucket.bucket-writer-policy-arn
+  db-password-secret-reader-policy-arn = module.database.db-password-secret-reader-policy-arn
+  media-files-bucket-id                = module.media-files-bucket.bucket-id
 }

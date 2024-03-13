@@ -8,6 +8,11 @@ variable "bucket-writer-policy-arn" {
   type        = string
 }
 
+variable "db-password-secret-reader-policy-arn" {
+  description = "arn of the policy to read the db password"
+  type        = string
+}
+
 variable "media-files-bucket-id" {
   description = "id of the media files bucket"
   type        = string
