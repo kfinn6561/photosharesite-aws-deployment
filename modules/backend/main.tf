@@ -33,7 +33,7 @@ resource "aws_iam_policy_attachment" "bucket-writer-attach" {
 
 resource "aws_iam_user" "backend-user" {
   force_destroy = true
-  name = "backend-user"
+  name          = "backend-user"
 }
 
 resource "aws_iam_access_key" "backend-user-access-key" {
