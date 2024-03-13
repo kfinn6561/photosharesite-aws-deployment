@@ -8,7 +8,7 @@ resource "aws_secretsmanager_secret_version" "secret_version" {
 }
 
 resource "aws_iam_policy" "secret-reader-policy" {
-  name        = var.secret_name + "_secret_reader_policy"
+  name        = "${var.secret_name}_secret_reader_policy"
   description = "policy allowing read the secret"
 
   # Terraform's "jsonencode" function converts a
