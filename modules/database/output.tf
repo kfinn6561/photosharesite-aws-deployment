@@ -11,3 +11,7 @@ output "db-password" {
 output "db-ip-address" {
   value = aws_instance.db.public_ip
 }
+
+output "db-password-secret-reader-policy-arn" {
+  value = module.db-password-secret.secret-reader-arn
+}

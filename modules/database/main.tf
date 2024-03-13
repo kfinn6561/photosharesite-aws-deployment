@@ -103,3 +103,9 @@ resource "aws_instance" "db" {
     Name = "Database"
   }
 }
+
+module "db-password-secret" {
+  source       = "../common/secret"
+  secret_name  = "pss-db-password"
+  secret_value = random_password.db-user-password.result
+}
